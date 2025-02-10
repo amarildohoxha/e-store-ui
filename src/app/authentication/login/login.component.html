@@ -1,0 +1,136 @@
+<div fxFlex="100" fxLayout="column" fxLayoutAlign="center center"
+     style="position: absolute !important; height: 100%; width: 100%">
+  <mat-card class="back-default">
+    <mat-card-content>
+      <div class="text-center pad-b-30">
+        <a [routerLink]="['/']">
+          <img style="max-height: 150px; max-width: 150px"
+               src="./assets/images/logos/cart.png"
+               class="align-middle m-2"
+               alt="logo"/>
+        </a>
+      </div>
+
+<!--      <div fxLayout="row" class="full-wid">-->
+<!--        <div style="margin-right: 5px" class="full-wid">-->
+<!--          <button mat-stroked-button class="full-wid">-->
+<!--            <div fxLayout="row">-->
+<!--              <img style="margin-right: 5px"-->
+<!--                   src="/assets/images/svgs/google-icon.svg"-->
+<!--                   alt="google"-->
+<!--                   width="16"-->
+<!--              />-->
+<!--              {{'common.sign-in-with-google' | translate}}-->
+<!--            </div>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <button mat-stroked-button>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div fxLayout="row" fxLayoutAlign="center center">&ndash;&gt;-->
+<!--&lt;!&ndash;              <img&ndash;&gt;-->
+<!--&lt;!&ndash;                src="/assets/images/svgs/facebook-icon.svg"&ndash;&gt;-->
+<!--&lt;!&ndash;                alt="facebook"&ndash;&gt;-->
+<!--&lt;!&ndash;                width="40"&ndash;&gt;-->
+<!--&lt;!&ndash;              />&ndash;&gt;-->
+<!--&lt;!&ndash;              {{'common.sign-in-with-facebook' | translate}}&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+
+<!--      <div class="divider" fxLayoutAlign="center center">-->
+<!--        or-->
+<!--      </div>-->
+
+
+      <form fxLayout="column" [formGroup]="form">
+        <mat-label class="pad-b-5"
+        >{{'login.username' | translate}}
+        </mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput formControlName="username"/>
+        </mat-form-field>
+        <!-- password -->
+        <mat-label class="pad-b-5"
+        >{{'common.password' | translate}}
+        </mat-label
+        >
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="password" formControlName="password"/>
+        </mat-form-field>
+
+<!--        <div fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--        <div fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--          <mat-checkbox color="primary">{{'login.remember-this-device' | translate}}</mat-checkbox>-->
+          <a
+            [routerLink]="['/forgot-password']"
+            class="text-primary pad-b-10">{{'login.forgot-password' | translate}}</a>
+<!--        </div>-->
+<!--        <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">-->
+<!--          {{'common.sign-in' | translate}}-->
+<!--        </a>-->
+        <div class="full-wid">
+          <button (click)="onLogin()" [disabled]="!form.valid" mat-button class="back-btn-default full-wid white">{{'common.sign-in' | translate}}</button>
+        </div>
+        <!-- input -->
+      </form>
+      <span class="text-center" style="margin-top: 10px" fxLayout="row">{{'login.no-account' | translate}}
+        <a [routerLink]="['/register']" class="text-decoration-none text-primary">
+              {{'login.create-an-account' | translate}}</a>
+          </span>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<!--<div class="container">-->
+<!--  <div class="header">-->
+<!--    <div class="close_button">-->
+<!--      <i class="ri-close-fill"></i>-->
+<!--    </div>-->
+<!--    <div class="logo">-->
+<!--      <i class="ri-twitter-x-fill"></i>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="content">-->
+
+<!--    <h1>Login to X</h1>-->
+
+<!--    <div class="action_buttons">-->
+<!--      <button class="primary sign_in">-->
+<!--        <object data="https://i.postimg.cc/KzSzY5g4/google.png" type=""></object>-->
+<!--        <span>Sign in with Google</span>-->
+<!--      </button>-->
+<!--      <button class="primary sign_in">-->
+<!--        <object data="https://i.postimg.cc/P57JgHXW/apple.png" type=""></object>-->
+<!--        <span>Sign in with Apple</span>-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--    <div class="divider">-->
+<!--      <p>or</p>-->
+<!--    </div>-->
+
+<!--    <div class="email_label">-->
+<!--      <input type="text" id="log_in" placeholder="email">-->
+<!--      <label for="log_in">Telephone, email, username</label>-->
+<!--    </div>-->
+
+<!--    <div class="sign_up_buttons">-->
+<!--      <button class="primary sign_up">-->
+<!--        Next-->
+<!--      </button>-->
+<!--      <button class="secondary sign_up">-->
+<!--        Forgot Password?-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  <div class="footer">-->
+<!--    <p>Don't have an account? <a href="/register">Sign up</a></p>-->
+<!--  </div>-->
+
+<!--</div>-->

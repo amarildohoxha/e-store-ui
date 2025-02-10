@@ -1,0 +1,11 @@
+<div fxLayout="row" class="slider-container" (mouseover)="showButtons = true" (mouseout)="showButtons = false">
+  <button class="slider-button left" (click)="prevSlide()" *ngIf="showButtons">&#9664;</button>
+  <div class="slider-wrapper" fxFlex="100">
+    <div fxLayout="row" fxFlex="100" class="slider" [style.transform]="'translateX(-' + (currentSlide * 100 / itemsPerPage) + '%)'">
+      <div class="slider-item" *ngFor="let item of items" fxFlex="100">
+<!--        <app-product [product]="item"></app-product>-->
+      </div>
+    </div>
+  </div>
+  <button class="slider-button right" (click)="nextSlide()" *ngIf="showButtons">&#9654;</button>
+</div>

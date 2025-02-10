@@ -1,0 +1,7 @@
+<span (click)="onSort()">
+  <span *ngIf="!icon" [ngStyle]="{'color': color}">{{label}}</span>
+  <mat-icon *ngIf="icon" [ngClass]="icon" [ngStyle]="{'color': color}" [matTooltip]="label"></mat-icon>
+  <mat-icon *ngIf="paging.$orderField === sortField" [ngClass]="paging.$orderDirection === 'DESC' ? 'nv-mi-arrow_drop_down' :
+  paging.$orderDirection === 'ASC' ? 'nv-mi-arrow_drop_up' : ''">
+  </mat-icon>
+</span>

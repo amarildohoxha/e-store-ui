@@ -1,0 +1,55 @@
+<div fxFlex="100" fxLayout="column">
+<div fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
+  <button (click)="closePopup()" mat-icon-button>
+    <mat-icon class="close-icon" >close</mat-icon>
+  </button>
+</div>
+<mat-card class="popup">
+  <div class="popup-header">
+<!--    <span class="close-btn" (click)="closePopup()">&times;</span>-->
+    <h2>Nike Sportswear Club Men's Athletic Shorts Gray</h2>
+    <p>from <strong>35.95 €</strong></p>
+  </div>
+  <div class="popup-body">
+    <div class="notification-section">
+      <label for="size">Notification for size:</label>
+      <select id="size" [(ngModel)]="selectedSize">
+        <option value="any">Any</option>
+        <!-- Add more sizes as needed -->
+      </select>
+    </div>
+    <div fxLayout="column">
+<!--      <label>-->
+<!--        <input type="checkbox" [(ngModel)]="priceDropEnabled">-->
+<!--        Price drop notification:-->
+<!--        <span>{{ price }} €</span>-->
+<!--      </label>-->
+      <mat-checkbox
+        class="example-margin"
+        [(ngModel)]="priceDropEnabled" [labelPosition]="'after'">
+        {{'Price drop notification:' | translate}} {{price}}
+      </mat-checkbox>
+      <mat-slider [disabled]="!priceDropEnabled" min="0" max="32" [showTickMarks]="true" [discrete]="true">
+        <input matSliderThumb [(ngModel)]="price">
+      </mat-slider>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="opacity-text">
+        <label>{{0 | currency:'EUR'}}</label>
+        <label>{{32 | currency:'EUR'}}</label>
+      </div>
+    </div>
+    <div class="additional-notifications">
+      <label>
+        <input type="checkbox" [(ngModel)]="availabilityChangeEnabled">
+        Availability changes
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="newReviewsEnabled">
+        New reviews
+      </label>
+    </div>
+  </div>
+  <div class="popup-footer">
+    <button class="save-btn" (click)="savePreferences()">Save</button>
+  </div>
+</mat-card>
+</div>

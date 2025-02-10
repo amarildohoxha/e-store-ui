@@ -1,0 +1,63 @@
+<div class="available-stores" fxFlex="100" fxLayout="column">
+  <h2 class="default">Διαθέσιμες Αλυσίδες</h2>
+  <span class="default pad-b-50 font-bold">{{'Σε'}} {{stores.length}} {{'αλυσίδες'}}</span>
+  <div class="stores-grid" fxFlex="100" fxLayout="row rap">
+    <div class="store-card" *ngFor="let store of stores">
+      <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+        <div class="store-image" style="margin: 20px">
+          <img [src]="store.image ? store.image : './assets/images/logos/default-store-icon.png'" alt="Store Image"/>
+        </div>
+        <div fxFlex="100" style="padding: 10px">
+          <div class="left">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <p><strong>{{ store.name }}</strong></p>
+              <div [fxHide.lt-md]="true" [fxHide.gt-sm]="false" class="opacity-text" fxLayout="row" fxLayoutAlign="start start">
+                <mat-icon style="font-size: 1rem">gps_fixed</mat-icon>
+                <span>{{store.distance}}</span>
+              </div>
+            </div>
+            <div *ngIf="product" class="left" fxLayout="column">
+              <span>{{product.name}}</span>
+              <span class="opacity-text">{{product.category}}</span>
+            </div>
+          </div>
+          <div class="pad-t-20" fxLayout="row rap" fxLayoutAlign="space-between center">
+            <div fxLayout="column" class="opacity-text">
+              <span class="text-left pad-b-5"><strong>{{'store.store-details' | translate}}</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start start" class="text-left">
+                <mat-icon style="font-size: 1rem">phone</mat-icon>
+                <span>{{store.phone}}</span>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start start" class="text-left">
+                <mat-icon style="font-size: 1rem">location_on</mat-icon>
+                <span>{{store.address}}</span>
+              </div>
+              <div [fxHide.lt-md]="false" [fxHide.gt-sm]="true" fxLayout="row" fxLayoutAlign="start start">
+                <mat-icon style="font-size: 1rem">gps_fixed</mat-icon>
+                <span>{{store.distance}}</span>
+              </div>
+            </div>
+            <!--              <span>{{ store.price }}€</span>-->
+            <button style="height: 40px" fxLayoutAlign="start center"
+                    class="cursor-pointer white back-btn-light-green border-none pad-l-30 pad-r-30">
+              <span class="pad-r-20">{{store.price }}</span>
+              <div class="border-solid border-radius-full">
+                <mat-icon style="padding: 5px; height: 16.2px; width: 19.2px; font-size: 1.2rem">shopping_cart
+                </mat-icon>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Chart-->
+  <div class="pad-t-50 pad-b-50 marg-b-20" fxLayout="column">
+    <div class="pad-b-50">
+      <h2 class="default"><strong>{{'common.monthly-pricing-review' | translate}}</strong></h2>
+    </div>
+    <div>
+      <app-line-chart></app-line-chart>
+    </div>
+  </div>
+</div>

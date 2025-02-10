@@ -1,0 +1,58 @@
+<!--<ul class="product-list" fxLayout="row wrap" style="list-style-type: none; padding: 0;">-->
+  <li style="display: flex; margin: 16px;">
+    <div ngStyle.xs="width: 200px" class="product-card back-white" style="display: flex; flex-direction: column;">
+      <div style="position: relative; width: 100%">
+              <span *ngIf="product.sale"
+                    class="discount">{{'-' + (100 - (product.price / product.oldPrice) * 100 | number: '1.0-1') + '%'}}</span>
+        <div class="action-container" fxLayout="row" fxLayoutAlign="end center">
+          <!--              <button class="favorite-button" mat-icon-button (click)="product.favorite = !product.favorite;$event.stopPropagation()">-->
+          <!--                <mat-icon *ngIf="!product.favorite" class="fa fa-heart-o"></mat-icon>-->
+          <!--                <mat-icon style="color: #f46353" *ngIf="product.favorite" class="fa fa-heart"></mat-icon>-->
+          <!--&lt;!&ndash;                <mat-icon [ngClass]="{'fa fa-heart': product.favorite, 'fa fa-heart-o': product.favorite}"></mat-icon>&ndash;&gt;-->
+          <!--              </button>-->
+          <button *ngIf="!showDeleteButton && isLogged" class="favorite-button" mat-icon-button (click)="product.favorite = !product.favorite;$event.stopPropagation()">
+            <mat-icon *ngIf="!product.favorite" class="fa fa-heart-o"></mat-icon>
+            <mat-icon style="color: #f46353" *ngIf="product.favorite" class="fa fa-heart"></mat-icon>
+            <!--                <mat-icon [ngClass]="{'fa fa-heart': product.favorite, 'fa fa-heart-o': product.favorite}"></mat-icon>-->
+          </button>
+          <button *ngIf="!showDeleteButton  && isLogged" class="bell-button" mat-icon-button (click)="onAddNotification(product);$event.stopPropagation()">
+            <mat-icon *ngIf="!product.notify" class="fa fa-bell-o"></mat-icon>
+            <mat-icon style="color: #f46353" *ngIf="product.notify" class="fa fa-bell"></mat-icon>
+          </button>
+          <button *ngIf="showDeleteButton" class="delete-button" mat-icon-button (click)="removeProduct();$event.stopPropagation()">
+            <mat-icon style="color: #f46353">delete_forever</mat-icon>
+          </button>
+        </div>
+        <img [src]="product.image" alt="{{ product.name }}" class="product-image">
+      </div>
+      <div class="product-info" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <span class="opacity-text">{{product.type}}</span>
+          <span fxFlex="30">{{'products.from' | translate}} <strong class="font-large">{{product.price | currency:'EUR' }}</strong></span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <div class="pad-t-10 pad-b-10" style="width: 100%;" fxLayoutAlign="space-between center" fxLayout="row">
+            <h4 class="text-left pad-l-10" [fxFlex]="product.sale ? 80 : 100" (click)="onProductInformation(product);$event.stopPropagation()"
+               style="word-break: break-word; cursor: pointer">{{product.name}}</h4>
+            <span *ngIf="product.sale" class="opacity-text text-line-through"
+                  fxFlex="20">{{product.oldPrice | currency:'EUR' }}</span>
+          </div>
+          <span
+            class="opacity-text">{{'products.in' | translate}} {{product.availability}} {{'chains' | translate}}</span>
+        </div>
+      </div>
+      <button (click)="onSelectCart(product)" *ngIf="!showActions" class="add-to-cart">{{'products.add-to-cart' | translate}}</button>
+      <div class="card-footer" *ngIf="showActions && basket" style="width: 100%">
+<!--      <div class="card-footer" *ngIf="showActions" style="width: 100%">-->
+<!--        <button *ngIf="product.quantity === 0; else updateQuantity"-->
+<!--                (click)="addToCart()"-->
+<!--                class="btn btn-block btn-secondary">Add to Cart</button>-->
+        <button *ngIf="basketService.getQuantity(basket, product) === 0; else updateQuantity" (click)="addToCart()" class="add-to-cart">{{'products.add-to-cart' | translate}}</button>
+        <ng-template #updateQuantity>
+          <product-quantity [product]="product" [basket]="basket">
+          </product-quantity>
+        </ng-template>
+      </div>
+    </div>
+  </li>
+<!--</ul>-->

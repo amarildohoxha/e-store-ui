@@ -1,0 +1,11 @@
+<div class="border-solid border-radius-20" style="padding: 20px; background-color: #f7f7f7">
+  <div fxLayoutAlign="space-between center">
+    <h2><strong>{{'line-chart.lowest-cart-price' | translate}}</strong></h2>
+    <div class="cart-add-product-btn" style="width: 95px; padding: 5px 15px 5px 15px">
+      <mat-select [placeholder]="'line-chart.year' | translate">
+        <mat-option *ngFor="let year of years" [value]="year">{{year.year}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+<div id="chartDiv" [style.width.%]="100" [style.height.px]="235"></div>
+</div>

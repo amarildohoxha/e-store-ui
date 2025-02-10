@@ -1,0 +1,46 @@
+<footer class="footer" fxFlex="100" fxLayout="column">
+  <div class="footer-content" fxLayout="row rap" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxFlex="30">
+      <a class=" pad-r-50" [routerLink]="'/'"><img style="width: 100px; height: 100px"
+                                                          src="/assets/images/logos/cart.png"
+                                                          alt=""></a>
+      <div class="footer-right" fxLayout="column">
+        <button class="btn-white" mat-menu-item>
+          <mat-icon class="white">arrow_forward</mat-icon>
+          <span>{{'footer.contact' | translate}}</span>
+        </button>
+        <button class="btn-white" mat-menu-item>
+          <mat-icon class="white">arrow_forward</mat-icon>
+          <span>{{'footer.frequent-questions' | translate}}</span>
+        </button>
+        <button class="btn-white" mat-menu-item>
+          <mat-icon class="white">arrow_forward</mat-icon>
+          <span>{{'footer.privacy-policy' | translate}}</span>
+        </button>
+        <button class="btn-white" mat-menu-item>
+          <mat-icon class="white">arrow_forward</mat-icon>
+          <span>{{'footer.cookies-policy' | translate}}</span>
+        </button>
+      </div>
+    </div>
+<!--    <div fxFlex="7"></div>-->
+    <div fxFlex.lt-md="100" fxFlex="33" fxLayout="column" [ngStyle.lt-md]="{'padding-top': '50px'}">
+      <span>{{'footer.download-application' | translate}}</span>
+      <div fxFlex="33" fxLayout="row">
+        <span><img style="width: 100px; height: 100px; padding-right: 10px"
+                   src="/assets/images/logos/play-store-badge.png" alt=""></span>
+        <span><img style="width: 100px; height: 100px" src="/assets/images/logos/app-store-badge.png" alt=""></span>
+      </div>
+    </div>
+    <div fxFlex="100" fxLayoutAlign="end center">
+      <button mat-icon-button (click)="scrollToTop()">
+        <mat-icon style="font-size: 1rem" class="fa fa-chevron-up"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="footer-right" fxFlex="100" fxLayoutAlign="space-between center">
+    <p>&copy; 2020 e-Store</p>
+    <a href="#">{{'footer.terms-of-use' | translate}}</a>
+  </div>
+</footer>

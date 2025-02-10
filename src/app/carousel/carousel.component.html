@@ -1,0 +1,53 @@
+<!--&lt;!&ndash; carousel &ndash;&gt;-->
+<!--<div class="carousel">-->
+<!--  <ng-container *ngFor="let slide of slides; let i = index">-->
+<!--    <img-->
+<!--      *ngIf="i === currentSlide"-->
+<!--      [src]="slide.src"-->
+<!--      class="slide"-->
+<!--    />-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; controls &ndash;&gt;-->
+<!--  <button class="control prev" (click)="onPreviousClick()">-->
+<!--    <span class="arrow left"></span>-->
+<!--  </button>-->
+<!--  <button class="control next" (click)="onNextClick()">-->
+<!--    <span class="arrow right"></span>-->
+<!--  </button>-->
+<!--</div>-->
+
+
+<!-- carousel -->
+<div fxFlex="100" fxLayout="column">
+  <div class="carousel">
+    <ng-container *ngFor="let slide of slides; let i = index">
+      <img
+        *ngIf="i === currentSlide"
+        [src]="slide.src"
+        class="slide"
+      />
+    </ng-container>
+
+
+    <div id="indicators">
+    <div *ngFor="let slide of slides; let i = index"
+      (click)="onImageSelect(i)"
+      class="indicator"
+      [ngClass]="{ active: i == currentSlide }"
+    ></div>
+    </div>
+
+    <!-- controls -->
+    <button class="control prev" (click)="onPreviousClick()">
+      <span class="arrow left"></span>
+    </button>
+    <button class="control next" (click)="onNextClick()">
+      <span class="arrow right"></span>
+    </button>
+  </div>
+  <div [fxHide.lt-md]="true" [fxHide.gt-sm]="false" fxLayout="row rap" class="custom-scroll marg-t-20 thumbnail-images">
+    <img class="cursor-pointer" [ngClass]="{'selected-img': currentSlide === i }" (click)="onImageSelect(i)"
+         *ngFor="let slide of slides;  let i = index" [src]="slide.src"/>
+  </div>
+</div>

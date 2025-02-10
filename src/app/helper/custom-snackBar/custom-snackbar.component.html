@@ -1,0 +1,16 @@
+<div style="background: inherit" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="type === 'info'" fxLayout="column" fxFlex="5">
+    <mat-icon class="cyb-mc-os-lightbulb-idea" style="padding-bottom: 10px; color: yellow"></mat-icon>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center start" fxFlex="95">
+    <h3 *ngIf="data.title">
+      {{data.title}}
+    </h3>
+    <span>
+            {{data.message}}
+        </span>
+  </div>
+  <button *ngIf="type !== 'info'" mat-icon-button (click)="close()" fxFlex="5">
+    <mat-icon matTooltip="Close">close</mat-icon>
+  </button>
+</div>

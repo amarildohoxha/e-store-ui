@@ -1,0 +1,11 @@
+<div fxLayout="row" fxFlex="100">
+  <div>
+    <button class="white" mat-button style="background-color: #ff6b6b" (click)="removeFromCart()">-</button>
+  </div>
+  <div class="full-wid text-center">
+    {{ basketProduct.quantity }} in cart
+  </div>
+  <div>
+    <button class="white back-btn-default" mat-button  (click)="addToCart()">+</button>
+  </div>
+</div>

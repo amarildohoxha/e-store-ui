@@ -1,0 +1,100 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+<button [disabled]="!paging.$hasFirstPage" mat-icon-button [matTooltip]="'common.paging.first' | translate"
+        matTooltipPosition="below" (click)="onFirstPage()">
+  <mat-icon>first_page</mat-icon>
+</button>
+<button [disabled]="!paging.$hasPreviousPage" mat-icon-button [matTooltip]="'common.paging.previous' | translate"
+        matTooltipPosition="below" (click)="onPreviousPage()">
+  <mat-icon> keyboard_arrow_left</mat-icon>
+</button>
+<button [disabled]="!paging.$hasNextPage" mat-icon-button [matTooltip]="'common.paging.next' | translate"
+        matTooltipPosition="below" (click)="onNextPage()">
+  <mat-icon>keyboard_arrow_right</mat-icon>
+</button>
+<button [disabled]="!paging.$hasLastPage" mat-icon-button [matTooltip]="'common.paging.last' | translate"
+        matTooltipPosition="below" (click)="onLastPage()">
+  <mat-icon>last_page</mat-icon>
+</button>
+
+<span>{{'common.paging.results' | translate}}: {{paging.$results}}</span>
+
+<span class="pad-l-10">{{'common.paging.page-size' | translate}}: {{paging.$pageSize}}</span>
+<button mat-icon-button [matMenuTriggerFor]="menuicon" [matTooltip]=""
+        aria-label="Open icon menu">
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+<mat-menu #menuicon="matMenu">
+  <button *ngFor="let size of $pageSizeList" mat-menu-item (click)="onPageSize(size)">
+    <span>{{size}}</span>
+  </button>
+</mat-menu>
+</div>
+
+
+
+
+<!--&lt;!&ndash;<nav class="pagination-nav">&ndash;&gt;-->
+<!--&lt;!&ndash;  <ul class="pagination">&ndash;&gt;-->
+<!--&lt;!&ndash;    <li class="page-item" [class.disabled]="currentPage === 1">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="page-link" (click)="setPage(1)">&laquo;&laquo;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li class="page-item" [class.disabled]="currentPage === 1">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="page-link" (click)="setPage(currentPage - 1)">&laquo;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li *ngFor="let page of pages" [class.active]="page === currentPage" class="page-item">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="page-link" (click)="setPage(page)">{{ page }}</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li class="page-item" [class.disabled]="currentPage === totalPages">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="page-link" (click)="setPage(currentPage + 1)">&raquo;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;    <li class="page-item" [class.disabled]="currentPage === totalPages">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a class="page-link" (click)="setPage(totalPages)">&raquo;&raquo;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;  </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;</nav>&ndash;&gt;-->
+
+
+<!--<div fxLayout="row" fxLayoutAlign="start center">-->
+<!--&lt;!&ndash;  <button tabindex="-1" [disabled]="!paging.hasFirstPage || !linksEnabled" mat-icon-button&ndash;&gt;-->
+<!--&lt;!&ndash;          [matTooltip]="'paging.first' | translate"&ndash;&gt;-->
+<!--&lt;!&ndash;          (click)="onFirstPage(paging)" matTooltipPosition="below">&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-icon class="cyb-mi-first_page"></mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;  </button>&ndash;&gt;-->
+<!--  <button tabindex="-1" [disabled]="!paging.$hasPreviousPage || !linksEnabled" mat-icon-button-->
+<!--          (click)="onPreviousPage(paging)" [matTooltip]="'paging.previous' | translate" matTooltipPosition="below">-->
+<!--    <mat-icon>keyboard_arrow_left</mat-icon>-->
+<!--  </button>-->
+
+<!--  <mat-form-field style="width: 40px; padding-top: 4px;">-->
+<!--    <input (keyup.enter)="onSetPage(paging)"-->
+<!--           [(ngModel)]="customPageNumber"-->
+<!--           [disabled]="!linksEnabled"-->
+<!--           appNumeric tabindex="-1"-->
+<!--           matInput>-->
+<!--  </mat-form-field>-->
+<!--  <span>{{ !linksEnabled ? '/ -' : '/ ' + getTotalPages(paging) }}</span>-->
+<!--  <button tabindex="-1" [disabled]="!paging.$hasNextPage || !linksEnabled" mat-icon-button-->
+<!--          [matTooltip]="'paging.next' | translate"-->
+<!--          (click)="onNextPage(paging)" matTooltipPosition="below">-->
+<!--    <mat-icon>keyboard_arrow_right</mat-icon>-->
+<!--  </button>-->
+<!--&lt;!&ndash;  <button tabindex="-1" [disabled]="!paging.hasLastPage || !linksEnabled" mat-icon-button&ndash;&gt;-->
+<!--&lt;!&ndash;          [matTooltip]="'paging.last' | translate"&ndash;&gt;-->
+<!--&lt;!&ndash;          (click)="onLastPage(paging)" matTooltipPosition="below">&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-icon class="cyb-mi-last_page"></mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;  </button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <span>{{ 'paging.results' | translate}}: {{paging.results}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;  <span *ngIf="showPageSize" style="padding-left: 2%;">{{ 'paging.page-size' | translate }}:&ndash;&gt;-->
+<!--&lt;!&ndash;    {{paging.pageSize}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;  <button tabindex="-1" *ngIf="showPageSize" mat-icon-button [mat-menu-trigger-for]="menuicon"&ndash;&gt;-->
+<!--&lt;!&ndash;          [disabled]="!linksEnabled"&ndash;&gt;-->
+<!--&lt;!&ndash;          aria-label="Open icon menu">&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-icon class="cyb-mi-arrow_drop_down"></mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;  </button>&ndash;&gt;-->
+<!--&lt;!&ndash;  <mat-menu #menuicon="matMenu">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button *ngFor="let size of pageSizeList" mat-menu-item (click)="onPageSize(paging, size)">&ndash;&gt;-->
+<!--&lt;!&ndash;      <span>{{size}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;  </mat-menu>&ndash;&gt;-->
+<!--</div>-->

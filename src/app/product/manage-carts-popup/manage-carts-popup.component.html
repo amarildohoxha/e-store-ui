@@ -1,0 +1,155 @@
+<!--<div fxLayout="column">-->
+<!--  <div cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" fxFlex fxLayout="row" fxLayoutAlign="end center">-->
+<!--    <button mat-dialog-close mat-icon-button>-->
+<!--      <mat-icon class="close-icon">close</mat-icon>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="popup">-->
+<!--    <mat-card class="custom-scroll" style="overflow: auto;" [ngStyle]="{'padding': smallWindow ? '0' : ''}">-->
+<!--      <div class="popup">-->
+<!--        <div fxLayout="row wrap" fxLayoutAlign="space-between center">-->
+<!--          <div fxLayout="column">-->
+<!--            <div fxLayout="row" fxLayoutAlign="start center">-->
+<!--              <h4 [ngStyle]="{'padding-top': smallWindow ? '5px' : ''}">{{modelParam ? ('popup.edit-cart' | translate) : ('popup.create-cart' | translate)}}</h4>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <mat-divider></mat-divider>-->
+<!--        <div class="gene-card-content" style="padding: 5px;">-->
+<!--          <table>-->
+<!--            <tbody [formGroup]="form" style="padding-bottom: 10px;">-->
+<!--            <tr class="no-td-padding">-->
+<!--              <td class="opacity-text tal-right" style="width: 30%;">-->
+<!--                <span>{{'common.name' | translate}}:</span>-->
+<!--              </td>-->
+<!--              <td style="width: 2%;"></td>-->
+<!--              <td style="width: 68%;">-->
+<!--                <mat-form-field>-->
+<!--                  <input formControlName="name" matInput style="text-transform:uppercase">-->
+<!--                </mat-form-field>-->
+<!--                &lt;!&ndash;                  <control-message [control]="form.controls.name">&ndash;&gt;-->
+<!--                &lt;!&ndash;                  </control-message>&ndash;&gt;-->
+<!--              </td>-->
+<!--            </tr>-->
+
+<!--            <tr *ngIf="!modelParam" class="no-td-padding">-->
+<!--              <td class="opacity-text tal-right">-->
+<!--                <span>{{'common.category' | translate}}:</span>-->
+<!--              </td>-->
+<!--              <td></td>-->
+<!--              <td>-->
+<!--                <mat-form-field>-->
+<!--                  <input formControlName="category" matInput>-->
+<!--                </mat-form-field>-->
+<!--                &lt;!&ndash;                  <control-message [control]="form.controls.category">&ndash;&gt;-->
+<!--                &lt;!&ndash;                  </control-message>&ndash;&gt;-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--&lt;!&ndash;          <div class="pad-wrap" fxLayoutAlign="center center">&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-card-actions>&ndash;&gt;-->
+<!--&lt;!&ndash;              <button (click)="onSave()" [disabled]="!form.valid || saveButtonDisabled"&ndash;&gt;-->
+<!--&lt;!&ndash;                      color="primary" mat-raised-button type="submit"&ndash;&gt;-->
+<!--&lt;!&ndash;                      [ngStyle]="{'cursor': saveButtonDisabled ? 'wait' : ''}">&ndash;&gt;-->
+<!--&lt;!&ndash;                {{'common.save' | translate}}&ndash;&gt;-->
+<!--&lt;!&ndash;              </button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </mat-card-actions>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </mat-card>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div fxFlex="100" fxLayout="column">
+  <div fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
+  </div>
+  <mat-card class="popup">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div fxLayout="column" fxFlex="100">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" style="padding-left: 10px">
+          <h4>{{'popup.edit-cart' | translate}}</h4>
+          <button [disabled]="!selectedBasket" [matTooltip]="'common.save' | translate" (click)="onSave()"
+                  mat-icon-button color="accent">
+            <!--    <mat-icon>qr_code_scanner</mat-icon>-->
+            <!--          <mat-icon>add_shopping_cart</mat-icon>-->
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-divider></mat-divider>
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="custom-scroll" style="gap: 20px; padding: 40px">
+      <div class="basket-card" *ngFor="let basket of baskets" [ngStyle]="{'background-color': selectedBasket?.id === basket.id ? '#9DA3D5FF' : ''}" (click)="onSelectBasket(basket)">
+        <div fxFlex="100" fxLayout="column" style="margin: 20px">
+          <div fxLayout="column">
+            <div fxLayoutAlign="center center">
+              <img src="./assets/images/logos/cart.png" alt="Basket Image"/>
+            </div>
+          </div>
+          <div fxFlex="100" fxLayout="column">
+            <div class="left">
+              <p><strong>{{ basket.name }}</strong></p>
+            </div>
+            <div class="opacity-text" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between start">
+              <span>{{basket.products.length}} {{'cart.products' | translate}}</span>
+              <!--            <div fxLayout="row">-->
+              <span>{{'cart.last-modified' | translate}} {{basket.lastUpdatedDate | date: 'dd/MM/yyyy'}}</span>
+              <!--            <span>{{basket.lastUpdatedDate | date: 'dd/MM/yyyy'}}</span>-->
+              <!--            </div>-->
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <p><strong>{{'cart.from' | translate}} {{ basket.costRange.min | currency:'EUR'}}</strong></p>
+              <button (click)="onViewCart(basket); $event.stopPropagation()" style="height: 40px" fxLayoutAlign="start center"
+                      class="mover-button-container cursor-pointer white back-btn-default border-none pad-l-30 pad-r-30">
+                <span class="pad-r-20">{{'cart.view-cart' | translate}}</span>
+                <mat-icon class="mover-button border-solid border-radius-full" style="padding: 3px">
+                  keyboard_arrow_right
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--      <div *ngFor="let basket of baskets">-->
+      <!--        <mat-card class="basket-card" style="margin: 10px" [ngStyle]="{'background-color':-->
+      <!--      selectedBasket?.id === basket.id ? '#9DA3D5FF' : ''}" (click)="onSelectBasket(basket)">-->
+      <!--          <mat-card-header fxLayout="column">-->
+      <!--            &lt;!&ndash;          <mat-card-title>{{ basket.name }} ({{ basket.category }})</mat-card-title>&ndash;&gt;-->
+      <!--            <div fxLayout="row" fxLayoutAlign="start center">-->
+      <!--              <div class="opacity-text tal-right">-->
+      <!--                <span>{{'common.name' | translate}}:</span>-->
+      <!--              </div>-->
+      <!--              <mat-card-title>{{ basket.name }}</mat-card-title>-->
+      <!--            </div>-->
+      <!--            <div fxLayout="row" fxLayoutAlign="start center">-->
+      <!--              <div class="opacity-text tal-right">-->
+      <!--                <span>{{'common.category' | translate}}:</span>-->
+      <!--              </div>-->
+      <!--              <mat-card-title>{{ basket.category }}</mat-card-title>-->
+      <!--            </div>-->
+      <!--          </mat-card-header>-->
+
+      <!--          <mat-card-content>-->
+      <!--            &lt;!&ndash;          <div class="price-range">&ndash;&gt;-->
+      <!--            &lt;!&ndash;            <strong>Price Range:</strong> {{ basket.costRange.min  }}&ndash;&gt;-->
+      <!--            &lt;!&ndash;          </div>&ndash;&gt;-->
+      <!--            <div *ngIf="basket.hasUnavailableProducts" class="unavailable-products">-->
+      <!--              <mat-icon color="warn">warning</mat-icon>-->
+      <!--              <span>Some products are not available in all stores</span>-->
+      <!--            </div>-->
+      <!--          </mat-card-content>-->
+      <!--        </mat-card>-->
+      <!--      </div>-->
+    </div>
+  </mat-card>
+</div>

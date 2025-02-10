@@ -1,0 +1,119 @@
+<div>
+
+  <div class="product main-router" fxLayout="row">
+    <!-- Filters here -->
+    <mat-card style="margin: 10px; padding: 10px; height: fit-content" fxFlex="20" fxHide.lt-md="true"
+              fxHide.gt-sm="false">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" style="padding-left: 5px">
+            <mat-icon style="font-size: 1rem">settings_input_component</mat-icon>
+            <span style="padding-left: 5px">{{'filters.title' | translate}}</span>
+          </div>
+          <button mat-icon-button>
+            <mat-icon style="font-size: 1rem">close</mat-icon>
+          </button>
+        </div>
+        <mat-divider style="padding-bottom: 10px"></mat-divider>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header style="height: 40px">
+              <mat-panel-title>{{'filters.category' | translate}}</mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <!--Eyros Timhs-->
+        <div fxLayout="column">
+          <mat-divider style="margin-top: 20px; margin-bottom: 5px"></mat-divider>
+          <h3>{{'filters.price-range' | translate}}</h3>
+          <mat-slider min="0" max="5" [showTickMarks]="true" [discrete]="true">
+            <input value="0" matSliderStartThumb>
+            <input value="5" matSliderEndThumb>
+          </mat-slider>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>{{0 | currency:'EUR'}}</label>
+            <label>{{100 | currency:'EUR'}}</label>
+          </div>
+          <mat-checkbox
+            class="example-margin"
+            [(ngModel)]="request.$offers" [labelPosition]="'after'">
+            {{'filters.offers' | translate}}
+          </mat-checkbox>
+        </div>
+
+        <!--Topothesia-->
+        <div fxLayout="column">
+          <mat-divider style="margin-top: 20px; margin-bottom: 5px"></mat-divider>
+          <h3>{{'filters.location' | translate}}</h3>
+          <mat-slider min="0" max="5" [showTickMarks]="true" [discrete]="true">
+            <input [(ngModel)]="request.$fromKM" value="0" matSliderStartThumb>
+            <input [(ngModel)]="request.$toKM" value="5" matSliderEndThumb>
+          </mat-slider>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>{{0}}</label>
+            <label>{{5}} {{'filters.km' | translate}}</label>
+          </div>
+        </div>
+
+        <!--Barcode-->
+        <div fxLayout="column">
+          <mat-divider style="margin-top: 20px; margin-bottom: 5px"></mat-divider>
+          <h3>{{'Barcode'}}</h3>
+
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <input [(ngModel)]="request.$barcode" matInput [placeholder]="'filters.fill-in-the-number' | translate"/>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <!--    </div>-->
+    <div fxFlex="100" style="margin: 10px">
+      <h2 style="margin-left: 20px">{{'products.title' | translate}}</h2>
+      <div fxLayoutAlign="space-between center" fxLayout="row" style="margin-left: 20px">
+        <span>{{products.length}} {{'products.title' | translate}}</span>
+        <div fxHide.lt-md="false" fxHide.gt-sm="true">
+          <button mat-menu-item>
+            <mat-icon>settings_input_component</mat-icon>
+            <span>{{'filters.title' | translate}}</span>
+          </button>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center" fxHide.lt-md="true" fxHide.gt-sm="false">
+          <span style="padding-right: 10px">{{'common.sort' | translate}}:</span>
+          <!--          <mat-form-field appearance="outline">-->
+          <div class="border full-wid" style="width: 200px; padding: 5px 15px 5px 15px">
+            <mat-select [placeholder]="'Test'" (selectionChange)="onList()"
+                        [(ngModel)]="this.request.$paging.$orderDirection">
+              <mat-option [value]="'asc'">{{'products.price-ascending' | translate}}</mat-option>
+              <mat-option [value]="'desc'">{{'products.price-descending' | translate}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" style="margin: 20px">
+        <div class="border" fxLayout="row" fxLayoutAlign="cnter center" style="margin-right: 10px">
+          <span>{{'Περιοχή Τιμών: 40,00 - 80,00 €' | translate}}</span>
+          <button mat-icon-button>
+            <mat-icon style="font-size: 1rem">close</mat-icon>
+          </button>
+        </div>
+        <button mat-menu-item style="width: 300px;">
+          <mat-icon style="font-size: 1rem">delete_forever</mat-icon>
+          <span style="font-size: 1rem">{{'products.clear-filters' | translate}}</span>
+        </button>
+      </div>
+
+      <ul class="product-list" fxLayout="row wrap" style="list-style-type: none; padding: 0;">
+
+        <app-product-card *ngFor="let product of products" [product]="product" [basket]="basket"
+                          [showActions]="showActions"></app-product-card>
+
+      </ul>
+      <div fxLayoutAlign="center center" fxLayout="row" style="margin: 30px">
+        <app-pagination [paging]="request.$paging" (emitPaging)="onChangePaging($event)">
+        </app-pagination>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<!--<header class="header">-->
+<!--  <div class="header-content">-->
+<!--    <img src="assets/logo.png" alt="Logo" class="logo">-->
+<!--    <h1>Καλως ορίσατε στην πλατφόρμα του e-kalathi</h1>-->
+<!--    <input type="text" placeholder="Αναζήτηση..." class="search-bar">-->
+<!--  </div>-->
+<!--</header>-->
+
+
+<header class="header" style="overflow-y: hidden">
+  <div fxFlex="100">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="50" class="marg-l-50" fxLayout="row" fxLayoutAlign="start center" style="gap: 50px">
+      <a [routerLink]="'/'"><img src="assets/images/logos/cart.png"
+                                 alt="Logo" class="logo"></a>
+        <div fxFlex="60" *ngIf="this.router.url !== '/'" class="search">
+          <input type="text" class="search-term-header" placeholder="Αναζήτηση...">
+          <button type="submit" class="search-button">
+            <i class="fa fa-search search-icon"></i>
+          </button>
+        </div>
+      </div>
+      <div fxFlex="50" fxLayout="row" fxLayoutAlign="end center">
+        <button [fxHide.xs]="true" [fxHide.gt-xs]="false" mat-icon-button [routerLink]="['/carts']">
+          <!--        <button mat-icon-button [routerLink]="['/basket']">-->
+          <span class="badge-notify">{{basketService.getBaskets().length}}</span>
+          <mat-icon class="fa fa-shopping-cart"></mat-icon>
+        </button>
+        <button [fxHide.xs]="true" [fxHide.gt-xs]="false" mat-icon-button class="ml-xs" [routerLink]="'/notifications'">
+          <span class="badge-notify">{{notificationCount}}</span>
+          <mat-icon [ngClass]="{'ring-animation': notificationCount > 0}">notifications</mat-icon>
+        </button>
+        <button [fxHide.xs]="true" [fxHide.gt-xs]="false" mat-icon-button [matMenuTriggerFor]="languageMenu"
+                [matTooltip]="currentLanguage === 'en' ? 'English (EN)' : 'Ελληνικά (EL)'">
+          <mat-icon>language</mat-icon>
+        </button>
+        <!--        <div class="border">-->
+        <!--          <button mat-fab extended [color]="'#4e57a6'">-->
+        <button [fxHide.xs]="true" [fxHide.gt-xs]="false" fxLayoutAlign="center center" (click)="onLogin()" mat-menu-item
+                style="background-color: #6C7CD8FF; border: aliceblue; color: white; border-radius: 50px; width: 150px; padding: 5px;">
+          <mat-icon style="color: white;">person_outline</mat-icon>
+          {{'header.login' | translate}}
+        </button>
+
+<!--        <mat-sidenav-container class="sidenav-container">-->
+<!--          <button [fxHide.xs]="false" [fxHide.gt-xs]="true" mat-icon-button (click)="sidenav.toggle()">-->
+<!--            <mat-icon>reorder</mat-icon>-->
+<!--          </button>-->
+<!--          <mat-sidenav class="sidenav" #sidenav [(opened)]="sidenavOpen">-->
+<!--            <div>-->
+<!--              <button mat-menu-item>-->
+<!--                <span >{{'Test'}}</span>-->
+<!--                <mat-icon [ngClass]="{'ring-animation': notificationCount > 0}">notifications</mat-icon>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </mat-sidenav>-->
+<!--        </mat-sidenav-container>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+</header>
+<mat-divider></mat-divider>
+<mat-menu fxLayout="column" xPosition="after" yPosition="below" #languageMenu="matMenu">
+  <div></div>
+  <button mat-menu-item (click)="onChangeLanguage('en')">
+    <!--    <mat-icon></mat-icon>-->
+    <span>{{'English (EN)'}}</span>
+    <mat-icon *ngIf="currentLanguage === 'en'">check</mat-icon>
+  </button>
+  <button mat-menu-item (click)="onChangeLanguage('el')">
+    <!--    <mat-icon></mat-icon>-->
+    <span>{{'Ελληνικά (EL)'}}</span>
+    <mat-icon *ngIf="currentLanguage === 'el'">check</mat-icon>
+  </button>
+</mat-menu>
